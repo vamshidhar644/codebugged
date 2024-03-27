@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Authentication from '../context/authentication';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -52,6 +53,11 @@ const Login = () => {
         >
           Signup
         </button>
+
+        <div className="flex items-center gap-2">
+          <p>Don't have account? </p>
+          <Link to="/signup">Signup</Link>
+        </div>
       </form>
     </div>
   );
