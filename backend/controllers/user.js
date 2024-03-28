@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../schemas/user');
 
 const signup = async (req, res) => {
   const { username, faceImg } = req.body;

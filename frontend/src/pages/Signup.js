@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Authentication from '../context/authentication';
 import { Link } from 'react-router-dom';
+import Camera from '../components/Camera';
 
 const Signup = () => {
   const [username, setUsername] = useState();
@@ -18,6 +19,7 @@ const Signup = () => {
       <h1 className="text-2xl mb-6">Sign Up</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+        <Camera />
         <label
           htmlFor="name"
           className="block text-sm font-medium text-gray-700"
@@ -31,20 +33,6 @@ const Signup = () => {
           autoComplete="name"
           className="mt-1 block w-full py-2 pl-3 pr-6 text-base leading-6 border rounded-lg shadow-md focus:leading-6"
           onChange={(e) => setUsername(e.target.value)}
-        />
-        <label
-          htmlFor="image"
-          className="mt-4 block text-sm font-medium text-gray-700"
-        >
-          Image
-        </label>
-        <input
-          type="text"
-          name="image"
-          id="image"
-          autoComplete="image"
-          className="mt-1 block w-full py-2 pl-3 pr-6 text-base leading-6 border rounded-lg shadow-md focus:leading-6"
-          onChange={(e) => setFaceImg(e.target.value)}
         />
 
         <button

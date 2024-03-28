@@ -1,6 +1,4 @@
 const express = require('express');
-const UserData = require('../models/user');
-
 const router = express.Router();
 
 const { signup, login } = require('../controllers/user');
