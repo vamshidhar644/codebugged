@@ -79,7 +79,7 @@ const Camera = ({ setDetection }) => {
     const imageSrc = canvasRef.current.toDataURL('image/jpeg');
 
     setCapturedImage(imageSrc);
-    setDetection(detections[0]);
+    setDetection(detections[0].detection);
   };
 
   const retake = () => {

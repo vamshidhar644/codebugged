@@ -20,7 +20,7 @@ const Authentication = () => {
     check(response);
   };
 
-  const login = async ({ username, faceImg }) => {
+  const login = async ({ username, detections }) => {
     const response = await fetch(`${BACKEND_URL}/api/user/login`, {
       method: 'POST',
       headers: {
@@ -28,7 +28,7 @@ const Authentication = () => {
       },
       body: JSON.stringify({
         username,
-        faceImg,
+        detections,
       }),
     });
 
@@ -39,7 +39,7 @@ const Authentication = () => {
     const json = await response.json();
 
     if (!response.ok) {
-      console.log(json.message);
+      console.log(json);
     }
     if (response.ok) {
       localStorage.setItem('user', JSON.stringify(json));

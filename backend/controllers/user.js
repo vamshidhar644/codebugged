@@ -1,4 +1,5 @@
 const User = require('../schemas/user');
+const { compareDetections } = require('../utils/Match');
 
 const signup = async (req, res) => {
   const { username, detections } = req.body;
@@ -20,22 +21,27 @@ const signup = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { username, faceImg } = req.body;
   try {
-    // Check if the username already exists
-    const existingUser = await User.findOne({
-      username: username,
-      faceImg: faceImg,
-    });
+    const { username, detections } = req.body;
 
-    if (existingUser) {
-      return res.status(201).json({ message: 'Login successful' });
+    // Retrieve user from database
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
 
-    res.status(500).json({ message: 'Invalid User' });
+    // Compare detections
+    const isMatch = await compareDetections(detections, user.detections);
+
+    if (isMatch) {
+      return res.status(200).json({ message: 'Login successful' });
+    } else {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
