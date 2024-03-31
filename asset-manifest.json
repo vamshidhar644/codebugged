@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/codebugged/static/css/main.2c22ec6d.css",
-    "main.js": "/codebugged/static/js/main.c6a264fb.js",
+    "main.js": "/codebugged/static/js/main.4b6acffb.js",
     "index.html": "/codebugged/index.html",
     "main.2c22ec6d.css.map": "/codebugged/static/css/main.2c22ec6d.css.map",
-    "main.c6a264fb.js.map": "/codebugged/static/js/main.c6a264fb.js.map"
+    "main.4b6acffb.js.map": "/codebugged/static/js/main.4b6acffb.js.map"
   },
   "entrypoints": [
     "static/css/main.2c22ec6d.css",
-    "static/js/main.c6a264fb.js"
+    "static/js/main.4b6acffb.js"
   ]
 }
