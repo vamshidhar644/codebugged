@@ -1,7 +1,10 @@
 import { UseAuthContext } from './useAuthContext';
+import { useSnackbar } from 'notistack';
 
 const Authentication = () => {
   const { dispatch } = UseAuthContext();
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const BACKEND_URL = 'http://localhost:4000';
 
@@ -39,13 +42,21 @@ const Authentication = () => {
     const json = await response.json();
 
     if (!response.ok) {
-      console.log(json);
+      enqueueSnackbar(json.message, {
+        variant: 'warning',
+        autoHideDuration: 2000,
+      });
     }
     if (response.ok) {
       localStorage.setItem('user', JSON.stringify(json));
 
       // update the auth context
       dispatch({ type: 'LOGIN', payload: json });
+
+      enqueueSnackbar(json.message, {
+        variant: 'success',
+        autoHideDuration: 2000,
+      });
     }
   };
   return { signup, login };

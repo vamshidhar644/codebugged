@@ -11,14 +11,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login({ username, detections });
+    await login({ username, detections: detections[0].detection });
   };
 
   return (
-    <div className="flex justify-center items-center h-screen flex-col">
-      <h1 className="text-2xl mb-6">Login</h1>
+    <div className="flex justify-center items-center flex-col py-6">
+      <h1 className="text-2xl">Login</h1>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-4">
         <Camera setDetection={setDetection} />
         <label
           htmlFor="name"
@@ -39,7 +39,7 @@ const Login = () => {
           type="submit"
           className="inline-flex justify-center py-2 px-8 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-950"
         >
-          Signup
+          Login
         </button>
 
         <div className="flex items-center gap-2">

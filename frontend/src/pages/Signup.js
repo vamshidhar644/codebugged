@@ -12,17 +12,17 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (username && detections) {
-      await signup({ username, detections });
+      await signup({ username, detections: detections[0].detection });
     } else {
       console.log('All field required');
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen flex-col">
-      <h1 className="text-2xl mb-6">Sign Up</h1>
+    <div className="flex justify-center items-center flex-col py-6">
+      <h1 className="text-2xl">Sign Up</h1>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-4">
         <Camera setDetection={setDetections} />
         <label
           htmlFor="name"

@@ -22,15 +22,28 @@ const Camera = ({ setDetection }) => {
     loadModels();
   }, [capturedImage]);
 
-  const startVideo = () => {
-    navigator.mediaDevices
-      .getUserMedia({ video: {} })
-      .then((stream) => {
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-        }
-      })
-      .catch((err) => console.error(err));
+  const [stream, setStream] = useState(null);
+
+  const startVideo = async () => {
+    try {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+      });
+      setStream(mediaStream);
+      if (videoRef.current) {
+        videoRef.current.srcObject = mediaStream;
+      }
+    } catch (error) {
+      console.error('Error accessing webcam:', error);
+    }
+  };
+
+  const stopVideo = () => {
+    if (stream) {
+      const tracks = stream.getTracks();
+      tracks.forEach((track) => track.stop());
+      setStream(null);
+    }
   };
 
   useEffect(() => {
@@ -75,38 +88,51 @@ const Camera = ({ setDetection }) => {
 
   const captureImage = () => {
     const context = canvasRef.current.getContext('2d');
-    context.drawImage(videoRef.current, 0, 0, 720, 560);
+    context.drawImage(videoRef.current, 0, 0, 490, 320);
     const imageSrc = canvasRef.current.toDataURL('image/jpeg');
 
     setCapturedImage(imageSrc);
-    setDetection(detections[0].detection);
+    setDetection(detections);
+
+    stopVideo();
   };
 
   const retake = () => {
+    startVideo();
     setCapturedImage(null);
     setDetections([]);
     setDetection([]);
   };
 
   return (
-    <div className="relative">
+    <div className="relative rounded-lg overflow-hidden">
       {capturedImage ? (
         <>
           <img src={capturedImage} alt="" />
 
-          <div onClick={retake} className="cursor-pointer z-[999] relative">
+          <div
+            onClick={retake}
+            className="text-white bg-[#00679b] absolute bottom-0 w-full py-2 flex justify-center cursor-pointer"
+          >
             Re-take
           </div>
         </>
       ) : (
         <>
-          <video ref={videoRef} width="720" height="560" autoPlay muted />
+          <video
+            ref={videoRef}
+            width="490"
+            height="320"
+            autoPlay
+            muted
+            className="rounded-lg"
+          />
           <canvas ref={canvasRef} style={{ position: 'absolute', top: 0 }} />
 
           {detections.length > 0 ? (
             <div
               onClick={captureImage}
-              className="cursor-pointer z-[999] relative"
+              className="text-white bg-[#00679b] absolute bottom-0 w-full py-2 flex justify-center cursor-pointer"
             >
               Capture
             </div>
