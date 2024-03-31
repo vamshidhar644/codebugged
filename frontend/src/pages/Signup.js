@@ -5,13 +5,17 @@ import Camera from '../components/Camera';
 
 const Signup = () => {
   const [username, setUsername] = useState();
-  const [faceImg, setFaceImg] = useState();
+  const [detections, setDetections] = useState(null);
 
   const { signup } = Authentication();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup({ username, faceImg });
+    if (username && detections) {
+      await signup({ username, detections });
+    } else {
+      console.log('All field required');
+    }
   };
 
   return (
@@ -19,7 +23,7 @@ const Signup = () => {
       <h1 className="text-2xl mb-6">Sign Up</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <Camera />
+        <Camera setDetection={setDetections} />
         <label
           htmlFor="name"
           className="block text-sm font-medium text-gray-700"

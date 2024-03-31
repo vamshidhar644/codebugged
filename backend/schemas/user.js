@@ -6,7 +6,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  faceImg: { type: String },
+  detections: { type: Object },
 });
 
 module.exports = mongoose.model('User', userSchema);

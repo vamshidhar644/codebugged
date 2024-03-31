@@ -5,16 +5,15 @@ const Authentication = () => {
 
   const BACKEND_URL = 'http://localhost:4000';
 
-  const signup = async ({ username, faceImg }) => {
+  const signup = async ({ username, detections }) => {
     const response = await fetch(`${BACKEND_URL}/api/user/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // Authorization: `Bearer ${user.token}`,
       },
       body: JSON.stringify({
         username,
-        faceImg,
+        detections,
       }),
     });
 
@@ -26,7 +25,6 @@ const Authentication = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // Authorization: `Bearer ${user.token}`,
       },
       body: JSON.stringify({
         username,
