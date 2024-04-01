@@ -6,7 +6,10 @@ const Authentication = () => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const BACKEND_URL = 'http://localhost:4000';
+  const BACKEND_URL =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4000'
+      : 'https://codebugged.onrender.com';
 
   const signup = async ({ username, detections }) => {
     const response = await fetch(`${BACKEND_URL}/api/user/signup`, {
