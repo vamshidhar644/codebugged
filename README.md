@@ -35,9 +35,9 @@ The main objective of this project is to showcase proficiency in various aspects
 
 ## How to Run the Application
 
-1. **Clone the Repository**: Clone the repository to your local machine using the command `git clone <repository-url>`.
+1. **Clone the Repository**: Clone the repository to your local machine using the command `git clone https://github.com/vamshidhar644/codebugged.git`.
 
-2. **Navigate to Project Directory**: Change directory to the project directory using `cd <project-directory>`.
+2. **Navigate to Project Directory**: Change directory to the project directory using `cd frontend` | `cd frontend`.
 
 3. **Install Dependencies**: Install dependencies for both the frontend and backend by running `npm install` in the `frontend` and `backend` directories.
 
