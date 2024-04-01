@@ -1,4 +1,4 @@
-# codebugged
+# codebugged | Full-Stack Developer Assessment
 
 # Face Recognition Web Application
 
